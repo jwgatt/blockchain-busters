@@ -6,7 +6,7 @@
 ## Brief:
 
 - I built this project following Buildspace course.(https://buildspace.so/)
-- I used hardhat, ethers.js, IPFS (just on the client side), and deployed on Goerli testnet. (0xe1AcD126BcAE46BC41d02e8f888823BB4e7505E7)
+- I used hardhat, ethers.js, IPFS (just on the client side), a Pinata node and deployed on Goerli testnet. (0xe1AcD126BcAE46BC41d02e8f888823BB4e7505E7)
 - The goal of our game will be to destroy a boss.
 - The boss (Sagat) has 10,000 HP(Hit/Health Points). What players do is when they start the game, they mint a character NFT (Genie/Shalaby/Pumpa) that has a certain amount of Attack Damage and HP. Players can order their character NFT to attack the boss and deal damage to it.
 - The goal? Players need to work together to attack the boss and bring its HP down to 0. The catch? Every time a player hit the boss, the boss hits the player back! If the NFT's HP goes below 0, the player's NFT dies and they can't hit the boss anymore. Players can only have one character NFT in their wallet. Once the character's NFT dies, it's game over. That means many players need to join forces to attack the boss and kill it.
