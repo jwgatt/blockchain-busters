@@ -9,6 +9,7 @@ import LoadingIndicator from '../LoadingIndicator';
  * We pass in our characterNFT metadata so we can show a cool card in our UI
  */
 const Arena = ({ characterNFT, setCharacterNFT }) => {
+
     // State
     const [gameContract, setGameContract] = useState(null);
     const [boss, setBoss] = useState(null)
@@ -36,6 +37,7 @@ const Arena = ({ characterNFT, setCharacterNFT }) => {
             setAttackState('');
         }
     };
+
     // UseEffects
     useEffect(() => {
         const { ethereum } = window;
@@ -55,7 +57,30 @@ const Arena = ({ characterNFT, setCharacterNFT }) => {
         }
     }, []);
 
+
+    // Fetch all playing characters
+
+    // Set state variables
+    const [characters, setCharacters] = useState([])
+
+
     useEffect(() => {
+        const fetchActivePlayerList = async () => {
+            try {
+                console.log('Getting contract characters to mint')
+
+                // wait for gameContract to return getAllPlayers function
+                const charactersTxn = await gameContract.getAllPlayers()
+                console.log('charactersTxn;', charactersTxn)
+
+                // Map over returned function data
+                const characters = charactersTxn.map((characterData) => transformCharacterData(characterData))
+                setCharacters(characters)
+            } catch (error) {
+                console.log('something went wrong finding characters:', error)
+            }
+        }
+
         const fetchBoss = async () => {
             const bossTxn = await gameContract.getBigBoss()
             console.log('Boss;', bossTxn)
@@ -63,7 +88,7 @@ const Arena = ({ characterNFT, setCharacterNFT }) => {
         }
         // Setup logic when this event is fired off
 
-        const onAttackComplete = ( setCharacterNFT, newBossHp, newPlayerHp) => {
+        const onAttackComplete = (setCharacterNFT, newBossHp, newPlayerHp) => {
             const bossHp = newBossHp.toNumber()
             const playerHp = newPlayerHp.toNumber()
 
@@ -84,6 +109,7 @@ const Arena = ({ characterNFT, setCharacterNFT }) => {
             fetchBoss();
             gameContract.on("AttackComplete", onAttackComplete);
         }
+        fetchActivePlayerList();
 
         //   Make sure to clean up this event when this component is removed
 
@@ -93,6 +119,28 @@ const Arena = ({ characterNFT, setCharacterNFT }) => {
             }
         };
     }, [gameContract]);
+
+    const renderActivePlayerList = () =>
+        characters.map((character, index) => (
+            <div key={index} className="player">
+                <div className='image-content'>
+                    <h2>{character.name}</h2>
+                    <img
+                        src={`${characterNFT.imageURI}`}
+                        alt={`Character ${character.name}`}
+                    />
+                    <div className="health-bar">
+                        <progress value={character.hp} max={character.maxHp} />
+                        <p>{`${character.hp} / ${character.maxHp} HP`}</p>
+                    </div>
+                    <div className='stats'>
+                        <h4>
+                            {`⚔️ Attack Damage: ${character.attackDamage}`}
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        ))
 
     return (
         <div className="arena-container">
@@ -148,6 +196,8 @@ const Arena = ({ characterNFT, setCharacterNFT }) => {
                                 <h4>{`⚔️ Attack Damage: ${characterNFT.attackDamage}`}</h4>
                             </div>
                         </div>
+                        <h2>Active Players</h2>
+                        <div className='player-container'>{renderActivePlayerList()}</div>
                     </div>
                 </div>
             )}

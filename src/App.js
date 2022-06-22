@@ -137,6 +137,7 @@ const App = () => {
     }
   }, [currentAccount]);
 
+
   return (
     <div className="App">
       <div className="container">
