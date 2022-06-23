@@ -1,7 +1,7 @@
-# Simple turn-based NFT browser game (Buildspace Second Project)
-![connectwallet](https://user-images.githubusercontent.com/79326421/171015064-cd2ccf69-5aec-4c09-9859-6928bbe7b10d.png)
-![choosefighter](https://user-images.githubusercontent.com/79326421/171015098-318bc00f-21e5-4684-a40e-d05f15790ab3.png)
-![fightarena](https://user-images.githubusercontent.com/79326421/171015110-ee8b5ec5-d130-4058-b594-bc0e6c94bdc0.png)
+# Simple turn-based NFT browser game (buildspace project)
+![Screenshot from 2022-06-22 21-01-51](https://user-images.githubusercontent.com/79326421/175116047-7fafd04c-cc86-4965-af97-831d390c0e23.png)
+![Screenshot from 2022-06-22 20-58-55](https://user-images.githubusercontent.com/79326421/175115619-54d36348-a675-440c-82ea-6e8372d08e1c.png)
+
 
 ## Brief:
 
